@@ -1,125 +1,48 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, useMediaQuery, Typography, Box } from '@mui/material';
+import { Menu } from '@mui/icons-material';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
+import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined'
 
-const drawerWidth = 240;
+const MySidebar = () => {
+  const [isOpen, setOpen] = useState(false);
+  const isSmallScreen = useMediaQuery('(max-width:600px)');
 
-const Sidebar = () => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setOpen(open);
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Toolbar>
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: 'none' } }}
-        >
-          <MenuIcon />
-        </IconButton>
-      </Toolbar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="sidebar"
-      >
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-        >
-          <Box position={'fixed'} top={0}>
-            <Typography variant="h6">
-              Movies
-            </Typography>
-          </Box>
-          <Box position={'fixed'} top={50}>
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <HomeOutlinedIcon />
-                  </ListItemIcon>
-                  <ListItemText>Home</ListItemText>
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <ExploreOutlinedIcon />
-                  </ListItemIcon>
-                  <ListItemText>Discover</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Box>
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
-          }}
-          open
-        >
-          <Box position={'fixed'} top={0}>
-            <Typography variant="h6" noWrap component="div">
-              Movies
-            </Typography>
-          </Box>
-          <Box position={'fixed'} bottom={50}>
-            <List>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <HomeOutlinedIcon />
-                  </ListItemIcon>
-                  <ListItemText>Home</ListItemText>
-                </ListItemButton>
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <ExploreOutlinedIcon />
-                  </ListItemIcon>
-                  <ListItemText>Discover</ListItemText>
-                </ListItemButton>
-              </ListItem>
-            </List>
-          </Box>
-        </Drawer>
+    <>
+      <IconButton onClick={toggleDrawer(true)}>
+        <Menu />
+      </IconButton>
+      <Drawer style={{ width: 300 }} variant={isSmallScreen ? 'temporary' : 'permanent'} open={isOpen} onClose={toggleDrawer(false)} sx={{
+            display: { xs: 'block', sm: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+          }}>
+        <Typography textAlign={'center'} variant='h6'>Movies</Typography>
+        <Box height="100%" display="flex" marginBottom={'100px'} flexDirection="column" alignItems={'center'} justifyContent={isSmallScreen ? 'flex-start' : 'flex-end'}>
+        <List>
+          <ListItem>
+            <ListItemIcon>
+              <HomeOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>
+              <ExploreOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Discover" />
+          </ListItem>
+        </List>
       </Box>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
-      >
-      </Box>
-    </Box>
-  )
-}
-
-export default Sidebar
+    </Drawer>
+    </>
+  );
+};
+export default MySidebar
