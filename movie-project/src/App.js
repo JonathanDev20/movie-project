@@ -4,6 +4,7 @@ import { Grid } from '@mui/material'
 import Sidebar from './components/Sidebar'
 import CssBaseline from '@mui/material/CssBaseline'
 import SearchField from './components/SearchField'
+import HomePage from './components/HomePage'
 
 const darkTheme = createTheme({
   palette: {
@@ -16,11 +17,8 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Grid container>
-        <Grid item xs={12} md={2}>
-          <Sidebar />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <SearchField />
+        <Grid md={12}>
+          <HomePage />
         </Grid>
       </Grid>
     </ThemeProvider>

@@ -1,0 +1,12 @@
+.trending {
+  position: relative;
+  text-align: center;
+  color: white;
+  margin: 10px;
+}
+
+.imageText {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}

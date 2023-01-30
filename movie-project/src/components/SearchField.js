@@ -5,7 +5,6 @@ const SearchField = () => {
   return (
     <TextField
     label="Search movie titles"
-    fullWidth
     margin="normal"
     variant="outlined"
   />
