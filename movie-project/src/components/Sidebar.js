@@ -3,6 +3,8 @@ import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, useMedi
 import { Menu } from '@mui/icons-material';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined'
+import { Link } from 'react-router-dom'
+import '../App.css'
 
 const MySidebar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -23,18 +25,22 @@ const MySidebar = () => {
         <Typography textAlign={'center'} variant='h6'>Movies</Typography>
         <Box height="100%" display="flex" marginBottom={'100px'} flexDirection="column" alignItems={'center'} justifyContent={isSmallScreen ? 'flex-start' : 'flex-end'}>
           <List>
-            <ListItem>
-              <ListItemIcon>
-                <HomeOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <ExploreOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Discover" />
-            </ListItem>
+            <Link className='navigation' to={'/'}>
+              <ListItem>
+                <ListItemIcon>
+                  <HomeOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Home" />
+              </ListItem>
+            </Link>
+            <Link className='navigation' to={'/discover'}>
+              <ListItem>
+                <ListItemIcon>
+                  <ExploreOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary="Discover" />
+              </ListItem>
+            </Link>
           </List>
         </Box>
       </Drawer>

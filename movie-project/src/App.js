@@ -5,6 +5,8 @@ import Sidebar from './components/Sidebar'
 import CssBaseline from '@mui/material/CssBaseline'
 import SearchField from './components/SearchField'
 import HomePage from './components/HomePage'
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import Discover from './components/Discover'
 
 const darkTheme = createTheme({
   palette: {
@@ -16,12 +18,13 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <Grid container>
-        <Grid md={12}>
-          <HomePage />
-        </Grid>
-      </Grid>
-    </ThemeProvider>
+      <HashRouter>
+        <Routes>
+          <Route exact path='/' element={<HomePage />}></Route>
+          <Route path='/discover' element={<Discover />}></Route>
+        </Routes>
+      </HashRouter>
+    </ThemeProvider >
   );
 }
 
