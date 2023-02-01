@@ -7,6 +7,7 @@ import SearchField from './components/SearchField'
 import HomePage from './components/HomePage'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import Discover from './components/Discover'
+import MoviePage from './components/MoviePage'
 
 const darkTheme = createTheme({
   palette: {
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<HomePage />}></Route>
           <Route path='/discover' element={<Discover />}></Route>
+          <Route path='/movie/:id' element={<MoviePage />}></Route>
         </Routes>
       </HashRouter>
     </ThemeProvider >

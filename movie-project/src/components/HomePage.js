@@ -4,6 +4,7 @@ import useFetch from './useFetch'
 import MySidebar from './Sidebar'
 import SearchField from './SearchField'
 import '../App.css'
+import { Link } from 'react-router-dom'
 
 
 const HomePage = () => {
@@ -50,11 +51,13 @@ const HomePage = () => {
                       nowPlayingData.results.map((movie) => (
                         <Grid item xs={6} md={2}>
                           <div className='imgContainer'>
-                            <img src={`${imageUrl}/${movie.poster_path}`} alt={`${movie.title}`} className='movieImg' style={{ height: 'auto', width: '100%', borderRadius: '5px' }} />
-                            <div className='middle'>
-                              <Typography className='textOnImg' variant='h5'>{movie.title}</Typography>
-                              <Typography className='textOnImg' variant='h9'>{movie.release_date.split('-')[0]}</Typography>
-                            </div>
+                            <Link to={`/movie/${movie.id}`}>
+                              <img src={`${imageUrl}/${movie.poster_path}`} alt={`${movie.title}`} className='movieImg' style={{ height: 'auto', width: '100%', borderRadius: '5px' }} />
+                              <div className='middle'>
+                                <Typography className='textOnImg' variant='h5'>{movie.title}</Typography>
+                                <Typography className='textOnImg' variant='h9'>{movie.release_date.split('-')[0]}</Typography>
+                              </div>
+                            </Link>
                           </div>
                         </Grid>
                       ))
@@ -67,11 +70,13 @@ const HomePage = () => {
                       topRatedData.results.map((movie) => (
                         <Grid item xs={6} md={2}>
                           <div className='imgContainer'>
-                            <img src={`${imageUrl}/${movie.poster_path}`} alt={`${movie.title}`} className='movieImg' style={{ height: 'auto', width: '100%', borderRadius: '5px' }} />
-                            <div className='middle'>
-                              <Typography className='textOnImg' variant='h5'>{movie.title}</Typography>
-                              <Typography className='textOnImg' variant='h9'>{movie.release_date.split('-')[0]}</Typography>
-                            </div>
+                            <Link to={`/movie/${movie.id}`}>
+                              <img src={`${imageUrl}/${movie.poster_path}`} alt={`${movie.title}`} className='movieImg' style={{ height: 'auto', width: '100%', borderRadius: '5px' }} />
+                              <div className='middle'>
+                                <Typography className='textOnImg' variant='h5'>{movie.title}</Typography>
+                                <Typography className='textOnImg' variant='h9'>{movie.release_date.split('-')[0]}</Typography>
+                              </div>
+                            </Link>
                           </div>
                         </Grid>
                       ))

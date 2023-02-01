@@ -6,7 +6,8 @@ const SearchField = () => {
     <TextField
     label="Search movie titles"
     margin="normal"
-    variant="outlined"
+    variant="filled"
+    sx={{ width: '20rem' }}
   />
   )
 }

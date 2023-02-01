@@ -39,7 +39,7 @@ const Discover = () => {
               {genresError && <div>{genresError}</div>}
               {isLoadingGenres ? <p>Loading...</p> : (
                 genres.genres.map((genre) => (
-                  <Button name={genre.id} onClick={(e) => handleGenreButton(e)} sx={{ margin: '4px' }} variant='outlined'>{genre.name}</Button>
+                  <Button color='warning' name={genre.id} onClick={(e) => handleGenreButton(e)} sx={{ margin: '4px' }} variant='outlined'>{genre.name}</Button>
                 )))}
               <Grid container my={4} spacing={2}>
                 {movies.map((movie) => (
