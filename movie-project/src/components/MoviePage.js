@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Grid, Typography, useMediaQuery, Button } from '@mui/material'
+import { Grid, Typography, useMediaQuery, Button, Card, CardMedia, CardContent } from '@mui/material'
+import StarRateIcon from '@mui/icons-material/StarRate'
 import MySidebar from './Sidebar'
 import useFetch from './useFetch'
 import YouTube from 'react-youtube'
@@ -10,11 +11,12 @@ const MoviePage = () => {
   const { id } = useParams()
   const [movieData, isLoadingMovie, movieError] = useFetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}`)
   const [videoData, isLoadingVideo, videoError] = useFetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
+  const [creditsData, isLoadingCredits, creditsError] = useFetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
   const [videoKey, setVideoKey] = useState('')
   const imageUrl = 'https://image.tmdb.org/t/p/original'
   const isSmallScreen = useMediaQuery('(max-width:1000px)')
 
-  console.log(movieData)
+  console.log(creditsData)
   // console.log(videoData)
 
   const opts = {
@@ -53,7 +55,8 @@ const MoviePage = () => {
                       <img src={`${imageUrl}/${isSmallScreen ? movieData.backdrop_path : movieData.poster_path}`} alt={movieData.title} style={{ height: 'auto', width: '70%', borderRadius: '10px' }} />
                     </Grid>
                     <Grid item md={6}>
-                      <Typography variant='h4'>{movieData.title}</Typography>
+                      <Typography my={2} variant='h4'>{movieData.title}</Typography>
+                      <StarRateIcon color='warning' /> {movieData.vote_average.toFixed(1)}
                       <div style={{ marginTop: '20px' }}>
                         {movieData.genres.map((genre) => (
                           <Button sx={{ marginRight: '4px' }} variant='outlined' color='warning'>{genre.name}</Button>
@@ -63,9 +66,33 @@ const MoviePage = () => {
                         {movieData.overview}
                       </div>
                     </Grid>
-                    <Grid item md={12}>
-                      
-                    </Grid>
+                    {creditsError && <div>{creditsError}</div>}
+                    {isLoadingCredits ? (
+                      <p>Loading...</p>
+                    ) : (
+                      <>
+                        <Grid container>
+                          <Grid item md={12}>
+                            <Typography my={4} variant='h4'>Cast</Typography>
+                          </Grid>
+                          {creditsData.cast.map((credit) => (
+                            <Grid item md={1}>
+                              <Card sx={{ margin: '5px' }}>
+                                <CardMedia sx={{ height: 150 }} image={`${imageUrl}${credit.profile_path}`} title={credit.name} />
+                                <CardContent>
+                                  <Typography gutterBottom variant="h7" component="div">
+                                    {credit.character}
+                                  </Typography>
+                                  <Typography variant="body2" color="text.secondary">
+                                    {credit.name}
+                                  </Typography>
+                                </CardContent>
+                              </Card>
+                            </Grid>
+                          ))}
+                        </Grid>
+                      </>
+                    )}
                   </Grid>
                   <div>
                     <YouTube

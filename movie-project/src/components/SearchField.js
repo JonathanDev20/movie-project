@@ -1,14 +1,33 @@
-import React from 'react'
-import { TextField } from '@mui/material'
+import React, { useState } from 'react'
+import { Paper, IconButton, InputBase } from '@mui/material'
+import Search from '@mui/icons-material/Search'
+import { useNavigate } from 'react-router-dom'
 
 const SearchField = () => {
+  const [searchWord, setSearchWord] = useState('')
+  const navigate = useNavigate()
+
+  const handleSubmit = () => {
+    navigate(`/search/${searchWord}`)
+  }
+
+  const handleChange = (e) => {
+    setSearchWord(e.target.value)
+  }
+
   return (
-    <TextField
-    label="Search movie titles"
-    margin="normal"
-    variant="filled"
-    sx={{ width: '20rem' }}
-  />
+    <Paper component="form"
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, mt: 2 }}>
+      <InputBase
+        sx={{ ml: 1, flex: 1 }}
+        placeholder="Search movie titles"
+        inputProps={{ 'aria-label': 'Search movie titles' }}
+        onChange={(e) => handleChange(e)}
+      />
+      <IconButton onClick={() => handleSubmit()} type="button" sx={{ p: '10px' }} aria-label="search">
+        <Search />
+      </IconButton>
+    </Paper>
   )
 }
 
