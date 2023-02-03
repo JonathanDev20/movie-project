@@ -4,12 +4,11 @@ import { Grid, Typography } from '@mui/material'
 import MySidebar from './Sidebar'
 import SearchField from './SearchField'
 import useFetch from './useFetch'
-import { Link } from 'react-router-dom'
+import Movie from './Movie'
 
 const SearchPage = () => {
   const { searchWord } = useParams()
   const [searchData, isLoadingSearch, searchError] = useFetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchWord}`)
-  const imageUrl = 'https://image.tmdb.org/t/p/original'
 
   return (
     <>
@@ -27,17 +26,7 @@ const SearchPage = () => {
                     {searchError && <div>{searchError}</div>}
                     {isLoadingSearch ? <p>Loading...</p> : (
                       searchData.results.map((movie) => (
-                        <Grid item xs={6} md={2}>
-                          <div className='imgContainer'>
-                            <Link to={`/movie/${movie.id}`}>
-                              <img src={`${imageUrl}/${movie.poster_path}`} alt={`${movie.title}`} className='movieImg' style={{ height: 'auto', width: '100%', borderRadius: '5px' }} />
-                              <div className='middle'>
-                                <Typography className='textOnImg' variant='h5'>{movie.title}</Typography>
-                                <Typography className='textOnImg' variant='h9'>{movie.release_date.split('-')[0]}</Typography>
-                              </div>
-                            </Link>
-                          </div>
-                        </Grid>
+                        <Movie movie={movie} />
                       ))
                     )}
                   </Grid>

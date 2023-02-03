@@ -5,6 +5,7 @@ import SearchField from './SearchField'
 import useFetch from './useFetch'
 import axios from 'axios'
 import '../App.css'
+import Movie from './Movie'
 
 const Discover = () => {
   const [genres, isLoadingGenres, genresError] = useFetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`)
@@ -43,15 +44,7 @@ const Discover = () => {
                 )))}
               <Grid container my={4} spacing={2}>
                 {movies.map((movie) => (
-                  <Grid item xs={6} md={2}>
-                    <div className='imgContainer'>
-                      <img src={`${imageUrl}/${movie.poster_path}`} alt={`${movie.title}`} className='movieImg' style={{ height: 'auto', width: '100%', borderRadius: '5px' }} />
-                      <div className='middle'>
-                        <Typography className='textOnImg' variant='h5'>{movie.title}</Typography>
-                        <Typography className='textOnImg' variant='h9'>{movie.release_date.split('-')[0]}</Typography>
-                      </div>
-                    </div>
-                  </Grid>
+                  <Movie movie={movie} />
                 ))}
               </Grid>
             </Grid>

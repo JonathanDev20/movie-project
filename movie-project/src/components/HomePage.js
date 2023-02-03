@@ -5,6 +5,7 @@ import MySidebar from './Sidebar'
 import SearchField from './SearchField'
 import '../App.css'
 import { Link } from 'react-router-dom'
+import Movie from './Movie'
 
 
 const HomePage = () => {
@@ -49,17 +50,7 @@ const HomePage = () => {
                     {error && <div>{error}</div>}
                     {isLoading ? <p>Loading...</p> : (
                       nowPlayingData.results.map((movie) => (
-                        <Grid item xs={6} md={2}>
-                          <div className='imgContainer'>
-                            <Link to={`/movie/${movie.id}`}>
-                              <img src={`${imageUrl}/${movie.poster_path}`} alt={`${movie.title}`} className='movieImg' style={{ height: 'auto', width: '100%', borderRadius: '5px' }} />
-                              <div className='middle'>
-                                <Typography className='textOnImg' variant='h5'>{movie.title}</Typography>
-                                <Typography className='textOnImg' variant='h9'>{movie.release_date.split('-')[0]}</Typography>
-                              </div>
-                            </Link>
-                          </div>
-                        </Grid>
+                        <Movie movie={movie} />
                       ))
                     )}
                   </Grid>
@@ -68,17 +59,7 @@ const HomePage = () => {
                     {topRError && <div>{topRError}</div>}
                     {topRLoading ? <p>Loading...</p> : (
                       topRatedData.results.map((movie) => (
-                        <Grid item xs={6} md={2}>
-                          <div className='imgContainer'>
-                            <Link to={`/movie/${movie.id}`}>
-                              <img src={`${imageUrl}/${movie.poster_path}`} alt={`${movie.title}`} className='movieImg' style={{ height: 'auto', width: '100%', borderRadius: '5px' }} />
-                              <div className='middle'>
-                                <Typography className='textOnImg' variant='h5'>{movie.title}</Typography>
-                                <Typography className='textOnImg' variant='h9'>{movie.release_date.split('-')[0]}</Typography>
-                              </div>
-                            </Link>
-                          </div>
-                        </Grid>
+                        <Movie movie={movie} />
                       ))
                     )}
                   </Grid>
