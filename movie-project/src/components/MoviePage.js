@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Grid, Typography, useMediaQuery, Button, Card, CardMedia, CardContent } from '@mui/material'
+import { Grid, Typography, useMediaQuery, Button, Card, CardMedia, CardContent, Dialog, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import MySidebar from './Sidebar'
 import useFetch from './useFetch'
 import YouTube from 'react-youtube'
 import '../App.css'
+import CustomDialog from './CustomDialog'
 
 const MoviePage = () => {
   const { id } = useParams()
@@ -16,8 +17,18 @@ const MoviePage = () => {
   const imageUrl = 'https://image.tmdb.org/t/p/original'
   const isSmallScreen = useMediaQuery('(max-width:1000px)')
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   console.log(creditsData)
-  // console.log(videoData)
+  console.log(videoData)
 
   const opts = {
     height: '100%',
@@ -31,7 +42,7 @@ const MoviePage = () => {
   useEffect(() => {
     if (!isLoadingVideo && videoError === null) {
       const trailer = videoData.results.filter((movie) => movie.type === 'Trailer')
-      setVideoKey(trailer[0].key)
+      setVideoKey(trailer[0]?.key)
     }
 
   }, [videoData, isLoadingVideo, videoError])
@@ -52,7 +63,7 @@ const MoviePage = () => {
                 <Grid item xs={12} md={10}>
                   <Grid container my={3}>
                     <Grid item xs={12} md={6}>
-                      <img src={`${imageUrl}/${isSmallScreen ? movieData.backdrop_path : movieData.poster_path}`} alt={movieData.title} style={{ height: 'auto', width: '70%', borderRadius: '10px' }} />
+                      <img src={movieData.poster_path === null ? './img/posterplaceholder.jpg' : `${imageUrl}/${isSmallScreen ? movieData.backdrop_path : movieData.poster_path}`} alt={movieData.title} style={{ height: 'auto', width: '70%', borderRadius: '10px' }} />
                     </Grid>
                     <Grid item md={6}>
                       <Typography my={2} variant='h4'>{movieData.title}</Typography>
@@ -75,10 +86,12 @@ const MoviePage = () => {
                           <Grid item md={12}>
                             <Typography my={4} variant='h4'>Cast</Typography>
                           </Grid>
-                          {creditsData.cast.map((credit) => (
-                            <Grid item md={1}>
-                              <Card sx={{ margin: '5px' }}>
-                                <CardMedia sx={{ height: 150 }} image={`${imageUrl}${credit.profile_path}`} title={credit.name} />
+                          <Grid item md={12}>
+                            {creditsData.cast.map((credit) => (
+                              <>
+                                <CustomDialog credit={credit} />
+                                {/* <Card sx={{ margin: '5px' }}>
+                              <CardMedia sx={{ height: 150 }} image={`${imageUrl}${credit.profile_path}`} title={credit.name} />
                                 <CardContent>
                                   <Typography gutterBottom variant="h7" component="div">
                                     {credit.character}
@@ -87,9 +100,10 @@ const MoviePage = () => {
                                     {credit.name}
                                   </Typography>
                                 </CardContent>
-                              </Card>
-                            </Grid>
-                          ))}
+                              </Card> */}
+                              </>
+                            ))}
+                          </Grid>
                         </Grid>
                       </>
                     )}

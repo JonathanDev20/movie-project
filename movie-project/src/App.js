@@ -1,9 +1,6 @@
 import './App.css'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
-import { Grid } from '@mui/material'
-import Sidebar from './components/Sidebar'
 import CssBaseline from '@mui/material/CssBaseline'
-import SearchField from './components/SearchField'
 import HomePage from './components/HomePage'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import Discover from './components/Discover'
@@ -14,6 +11,9 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
   },
+  typography: {
+    fontFamily: 'Montserrat'
+  }
 })
 
 function App() {
