@@ -23,8 +23,14 @@
 
 .imageText {
   position: absolute;
-  bottom: 8px;
-  left: 16px;
+  bottom: 6px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  width: 100%;
+}
+
+.imageText>p {
+
 }
 
 .imgContainer {

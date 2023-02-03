@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Grid, Typography, useMediaQuery, Button, Card, CardMedia, CardContent, Dialog, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+import { Grid, Typography, useMediaQuery, Button } from '@mui/material'
 import StarRateIcon from '@mui/icons-material/StarRate'
 import MySidebar from './Sidebar'
 import useFetch from './useFetch'
@@ -16,16 +16,6 @@ const MoviePage = () => {
   const [videoKey, setVideoKey] = useState('')
   const imageUrl = 'https://image.tmdb.org/t/p/original'
   const isSmallScreen = useMediaQuery('(max-width:1000px)')
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   console.log(creditsData)
   console.log(videoData)
@@ -88,20 +78,7 @@ const MoviePage = () => {
                           </Grid>
                           <Grid item md={12}>
                             {creditsData.cast.map((credit) => (
-                              <>
-                                <CustomDialog credit={credit} />
-                                {/* <Card sx={{ margin: '5px' }}>
-                              <CardMedia sx={{ height: 150 }} image={`${imageUrl}${credit.profile_path}`} title={credit.name} />
-                                <CardContent>
-                                  <Typography gutterBottom variant="h7" component="div">
-                                    {credit.character}
-                                  </Typography>
-                                  <Typography variant="body2" color="text.secondary">
-                                    {credit.name}
-                                  </Typography>
-                                </CardContent>
-                              </Card> */}
-                              </>
+                              <CustomDialog credit={credit} />
                             ))}
                           </Grid>
                         </Grid>

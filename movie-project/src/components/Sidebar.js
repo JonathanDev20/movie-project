@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, useMediaQuery, Typography, Box, Grid } from '@mui/material';
+import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, useMediaQuery, Typography, Box } from '@mui/material';
 import { Menu } from '@mui/icons-material';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined'
@@ -20,7 +20,7 @@ const MySidebar = () => {
         <Menu />
       </IconButton>
       <Drawer anchor='left' variant={isSmallScreen ? 'temporary' : 'permanent'} open={isOpen} onClose={toggleDrawer(false)} sx={{
-        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '15vw' },
+        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: isSmallScreen ? '180px' : '15vw' },
       }}>
         <Typography textAlign={'center'} variant='h6'>Movies</Typography>
         <Box height="100%" display="flex" marginBottom={'100px'} flexDirection="column" alignItems={'center'} justifyContent={isSmallScreen ? 'flex-start' : 'flex-end'}>

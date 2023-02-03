@@ -35,13 +35,13 @@ const HomePage = () => {
                     <Grid item md={6}>
                       <div className='trending'>
                         <img src={`${imageUrl}/${trendingData.results[0].backdrop_path}`} alt="image1" style={{ height: 'auto', width: '100%', borderRadius: '10px' }} />
-                        <div className='imageText'>{trendingData.results[0].title}</div>
+                        <div className='imageText'><p>{trendingData.results[0].title}</p></div>
                       </div>
                     </Grid>
                     <Grid item md={6}>
                       <div className='trending'>
                         <img src={`${imageUrl}/${trendingData.results[1].backdrop_path}`} alt="image2" style={{ height: 'auto', width: '100%', borderRadius: '10px' }} />
-                        <div className='imageText'>{trendingData.results[1].title}</div>
+                        <div className='imageText'><p>{trendingData.results[1].title}</p></div>
                       </div>
                     </Grid>
                   </Grid>
