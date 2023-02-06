@@ -45,13 +45,12 @@ const SearchPage = () => {
               <Grid item md={10}>
                 <SearchField />
                 <Typography my={4} variant='h4'>Top results</Typography>
-
                 <Grid container my={4} spacing={2}>
                   {searchError && <div>{searchError}</div>}
                   {isLoadingSearch ? <p>Loading...</p> : (
                     sortedData.length === 0 ? <Grid item md={12}><div>Sorry, no results found for '{searchWord}'... Please try a different search term.</div></Grid> : (
                       <>
-                        <Grid item md={12}>
+                        <Grid item xs={12} md={12}>
                           <SortMovies sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} />
                         </Grid>
                         {sortedData.map((movie) => (
