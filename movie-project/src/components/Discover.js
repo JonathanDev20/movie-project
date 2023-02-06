@@ -6,7 +6,7 @@ import useFetch from './useFetch'
 import axios from 'axios'
 import '../App.css'
 import Movie from './Movie'
-import FilterListIcon from '@mui/icons-material/FilterList'
+import SortMovies from './SortMovies'
 
 
 const Discover = () => {
@@ -14,7 +14,6 @@ const Discover = () => {
   const [category, setCategory] = useState(28)
   const [movies, setMovies] = useState([])
   const [sortCriteria, setSortCriteria] = useState('')
-  const imageUrl = 'https://image.tmdb.org/t/p/original'
 
   useEffect(() => {
     async function getMoviesByGenre() {
@@ -57,23 +56,7 @@ const Discover = () => {
                   <Button color='warning' name={genre.id} onClick={(e) => handleGenreButton(e)} sx={{ margin: '4px' }} variant='outlined'>{genre.name}</Button>
                 )))}
               <Grid my={2}>
-                  <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                    <InputLabel id="demo-select-small">Sort</InputLabel>
-                    <Select
-                      labelId="demo-select-small"
-                      id="demo-select-small"
-                      value={sortCriteria}
-                      label="Sort"
-                      onChange={event => setSortCriteria(event.target.value)}
-                    >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value="title">Title (A - Z)</MenuItem>
-                      <MenuItem value="releaseDate">Release Date (Newest First)</MenuItem>
-                      <MenuItem value="rating">Rating (High - Low)</MenuItem>
-                    </Select>
-                  </FormControl>
+                <SortMovies sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} />
               </Grid>
               <Grid container my={4} spacing={2}>
                 {movies.map((movie) => (

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, useMediaQuery, Typography, Box } from '@mui/material';
+import { Drawer, IconButton, List, ListItem, ListItemIcon, useMediaQuery, Typography, Box } from '@mui/material';
 import { Menu } from '@mui/icons-material';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import '../App.css'
 
 const MySidebar = () => {
@@ -25,22 +25,22 @@ const MySidebar = () => {
         <Typography textAlign={'center'} variant='h6'>Movies</Typography>
         <Box height="100%" display="flex" marginBottom={'100px'} flexDirection="column" alignItems={'center'} justifyContent={isSmallScreen ? 'flex-start' : 'flex-end'}>
           <List>
-            <Link className='navigation' to={'/'}>
+            <NavLink to={'/'} className='navigation'>
               <ListItem>
                 <ListItemIcon>
                   <HomeOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <Typography className='link'>Home</Typography>
               </ListItem>
-            </Link>
-            <Link className='navigation' to={'/discover'}>
+            </NavLink>
+            <NavLink className='navigation' to={'/discover'}>
               <ListItem>
                 <ListItemIcon>
                   <ExploreOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Discover" />
+                <Typography className='link'>Discover</Typography>
               </ListItem>
-            </Link>
+            </NavLink>
           </List>
         </Box>
       </Drawer>

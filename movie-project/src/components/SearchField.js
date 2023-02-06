@@ -8,7 +8,9 @@ const SearchField = () => {
   const navigate = useNavigate()
 
   const handleSubmit = () => {
-    navigate(`/search/${searchWord}`)
+    if(searchWord !== '') {
+      navigate(`/search/${searchWord}`)
+    }
   }
 
   const handleChange = (e) => {
@@ -17,7 +19,7 @@ const SearchField = () => {
 
   return (
     <Paper component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, mt: 2 }}>
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 390, mt: 2 }}>
       <InputBase
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search movie titles"

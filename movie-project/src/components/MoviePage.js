@@ -58,6 +58,9 @@ const MoviePage = () => {
                     <Grid item md={6}>
                       <Typography my={2} variant='h4'>{movieData.title}</Typography>
                       <StarRateIcon color='warning' /> {movieData.vote_average.toFixed(1)}
+                      <Grid my={2}>
+                        <Typography variant='h8'>{movieData.release_date.split('-')[0]}</Typography>
+                      </Grid>
                       <div style={{ marginTop: '20px' }}>
                         {movieData.genres.map((genre) => (
                           <Button sx={{ marginRight: '4px' }} variant='outlined' color='warning'>{genre.name}</Button>

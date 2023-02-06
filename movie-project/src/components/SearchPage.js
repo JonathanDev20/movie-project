@@ -1,21 +1,42 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Grid, Typography } from '@mui/material'
 import MySidebar from './Sidebar'
 import SearchField from './SearchField'
 import useFetch from './useFetch'
 import Movie from './Movie'
+import SortMovies from './SortMovies'
 
 const SearchPage = () => {
   const { searchWord } = useParams()
+  const [sortCriteria, setSortCriteria] = useState('')
+  const [sortedData, setSortedData] = useState([])
   const [searchData, isLoadingSearch, searchError] = useFetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${searchWord}`)
 
-  console.log(searchData)
+  useEffect(() => {
+    if (!isLoadingSearch && searchError === null) {
+      const sortedMovies = [...searchData.results].sort((a, b) => {
+        if (sortCriteria === 'title') {
+          return a.title.localeCompare(b.title)
+        } else if (sortCriteria === 'releaseDate') {
+          return new Date(b.release_date) - new Date(a.release_date)
+        } else if (sortCriteria === 'rating') {
+          return b.vote_average - a.vote_average
+        } else {
+          return searchData
+        }
+      })
+      setSortedData(sortedMovies)
+      console.log(sortCriteria)
+    }
+  }, [sortCriteria, searchData, isLoadingSearch, searchError])
+
+  console.log(sortedData)
 
   return (
     <>
       <Grid container>
-        <Grid md={12}>
+        <Grid item md={12}>
           <div>
             <Grid container>
               <Grid item md={2}>
@@ -24,13 +45,19 @@ const SearchPage = () => {
               <Grid item md={10}>
                 <SearchField />
                 <Typography my={4} variant='h4'>Top results</Typography>
+
                 <Grid container my={4} spacing={2}>
                   {searchError && <div>{searchError}</div>}
                   {isLoadingSearch ? <p>Loading...</p> : (
-                    searchData.results.length === 0 ? <Grid item md={12}><div>Sorry, no results found for '{searchWord}'... Please try a different search term.</div></Grid> : (
-                      searchData.results.map((movie) => (
-                        <Movie movie={movie} />
-                      ))
+                    sortedData.length === 0 ? <Grid item md={12}><div>Sorry, no results found for '{searchWord}'... Please try a different search term.</div></Grid> : (
+                      <>
+                        <Grid item md={12}>
+                          <SortMovies sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} />
+                        </Grid>
+                        {sortedData.map((movie) => (
+                          <Movie key={movie.id} movie={movie} />
+                        ))}
+                      </>
                     )
                   )}
                 </Grid>
