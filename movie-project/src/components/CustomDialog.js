@@ -31,10 +31,10 @@ const CustomDialog = ({ credit }) => {
         aria-describedby="alert-dialog-description"
       >
         <Grid container>
-          <Grid item md={4}>
+          <Grid item xs={12} md={4}>
             <img style={{ height: 'auto', width: '100%' }} src={credit.profile_path === null ? './movie-project/img/posterplaceholder.jpg' : `${imageUrl}${credit.profile_path}`} alt="credit" />
           </Grid>
-          <Grid item md={8}>
+          <Grid item xs={12} md={8}>
               <Grid item xs={10} md={10}>
                 <DialogTitle id="alert-dialog-title">
                   {credit.character === '' ? `"${credit.name}"` : credit.character}
