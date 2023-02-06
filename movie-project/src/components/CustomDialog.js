@@ -7,9 +7,6 @@ const CustomDialog = ({ credit }) => {
   const [personData, isLoading, error] = useFetch(`https://api.themoviedb.org/3/person/${credit.id}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
   const [open, setOpen] = useState(false)
 
-  console.log(credit)
-  console.log(personData)
-
   const calculateAge = (birthDate) => {
     const birth = new Date(birthDate)
     const current = new Date()

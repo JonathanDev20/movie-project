@@ -27,11 +27,8 @@ const SearchPage = () => {
         }
       })
       setSortedData(sortedMovies)
-      console.log(sortCriteria)
     }
   }, [sortCriteria, searchData, isLoadingSearch, searchError])
-
-  console.log(sortedData)
 
   return (
     <>
