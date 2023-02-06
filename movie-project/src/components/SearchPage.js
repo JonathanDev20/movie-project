@@ -33,6 +33,10 @@ const SearchPage = () => {
 
   return (
     <>
+      {searchError && <div>{searchError}</div>}
+      {isLoadingSearch ? (
+        <p>Loading...</p>
+      ) : (
       <Grid container>
         <Grid item md={12}>
           <div>
@@ -64,6 +68,7 @@ const SearchPage = () => {
           </div>
         </Grid>
       </Grid>
+      )}
     </>
   )
 }
