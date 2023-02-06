@@ -62,7 +62,6 @@ const SearchPage = () => {
                     )
                   )}
                 </Grid>
-                <Footer />
               </Grid>
             </Grid>
           </div>

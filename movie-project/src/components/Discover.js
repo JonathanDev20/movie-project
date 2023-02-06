@@ -8,6 +8,7 @@ import '../App.css'
 import Movie from './Movie'
 import SortMovies from './SortMovies'
 import Footer from './Footer'
+import Genres from './Genres'
 
 
 const Discover = () => {
@@ -15,6 +16,7 @@ const Discover = () => {
   const [category, setCategory] = useState(28)
   const [movies, setMovies] = useState([])
   const [sortCriteria, setSortCriteria] = useState('')
+  const [selectedGenre, setSelectedGenre] = useState(0)
 
   useEffect(() => {
     async function getMoviesByGenre() {
@@ -36,8 +38,9 @@ const Discover = () => {
     getMoviesByGenre()
   }, [category, sortCriteria])
 
-  const handleGenreButton = (e) => {
+  const handleGenreButton = (index, e) => {
     setCategory(e.target.name)
+    setSelectedGenre(index)
   }
 
   return (
@@ -53,8 +56,8 @@ const Discover = () => {
               <Typography my={4} variant='h4'>Discover</Typography>
               {genresError && <div>{genresError}</div>}
               {isLoadingGenres ? <p>Loading...</p> : (
-                genres.genres.map((genre) => (
-                  <Button color='warning' name={genre.id} onClick={(e) => handleGenreButton(e)} sx={{ margin: '4px' }} variant='outlined'>{genre.name}</Button>
+                genres.genres.map((genre, index) => (
+                  <Button key={index} color='warning' name={genre.id} onClick={(e) => handleGenreButton(index, e)} sx={{ margin: '4px' }} variant={index === selectedGenre ? 'contained' : 'outlined'}>{genre.name}</Button>
                 )))}
               <Grid my={2}>
                 <SortMovies sortCriteria={sortCriteria} setSortCriteria={setSortCriteria} />
@@ -64,7 +67,6 @@ const Discover = () => {
                   <Movie movie={movie} />
                 ))}
               </Grid>
-              <Footer />
             </Grid>
           </Grid>
         </div>

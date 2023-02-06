@@ -6,6 +6,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom'
 import Discover from './components/Discover'
 import MoviePage from './components/MoviePage'
 import SearchPage from './components/SearchPage'
+import Footer from './components/Footer'
 
 const darkTheme = createTheme({
   palette: {
@@ -28,6 +29,7 @@ function App() {
           <Route path='/search/:searchWord' element={<SearchPage />}></Route>
         </Routes>
       </HashRouter>
+      <Footer />
     </ThemeProvider >
   );
 }

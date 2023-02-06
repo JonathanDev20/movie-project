@@ -6,7 +6,6 @@ import SearchField from './SearchField'
 import '../App.css'
 import { Link } from 'react-router-dom'
 import Movie from './Movie'
-import Footer from './Footer'
 
 const HomePage = () => {
   const [trendingData, isLoadingTrending, trendingError] = useFetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_API_KEY}`)
@@ -67,7 +66,6 @@ const HomePage = () => {
                       ))
                     )}
                   </Grid>
-                  <Footer />
                 </Grid>
               </Grid>
             </div>
