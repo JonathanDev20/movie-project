@@ -7,6 +7,7 @@ import axios from 'axios'
 import '../App.css'
 import Movie from './Movie'
 import SortMovies from './SortMovies'
+import Footer from './Footer'
 
 
 const Discover = () => {
@@ -63,6 +64,7 @@ const Discover = () => {
                   <Movie movie={movie} />
                 ))}
               </Grid>
+              <Footer />
             </Grid>
           </Grid>
         </div>

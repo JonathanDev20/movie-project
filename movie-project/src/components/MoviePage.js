@@ -17,9 +17,6 @@ const MoviePage = () => {
   const imageUrl = 'https://image.tmdb.org/t/p/original'
   const isSmallScreen = useMediaQuery('(max-width:1000px)')
 
-  console.log(creditsData)
-  console.log(videoData)
-
   const opts = {
     height: '100%',
     width: '100%',
@@ -52,8 +49,8 @@ const MoviePage = () => {
                 </Grid>
                 <Grid item xs={12} md={10}>
                   <Grid container my={3}>
-                    <Grid item xs={12} md={6}>
-                      <img src={movieData.poster_path === null ? './img/posterplaceholder.jpg' : `${imageUrl}/${isSmallScreen ? movieData.backdrop_path : movieData.poster_path}`} alt={movieData.title} style={isSmallScreen ? { height: 'auto', width: '100%', borderRadius: '10px' } : { height: 'auto', width: '70%', borderRadius: '10px' }} />
+                    <Grid item xs={12} md={6}> 
+                      <img src={movieData.poster_path === null ? './movie-project/img/posterplaceholder.jpg' : `${imageUrl}/${isSmallScreen ? movieData.backdrop_path : movieData.poster_path}`} alt={movieData.title} style={isSmallScreen ? { height: 'auto', width: '100%', borderRadius: '10px' } : { height: 'auto', width: '70%', borderRadius: '10px' }} />
                     </Grid>
                     <Grid item md={6}>
                       <Typography my={2} variant='h4'>{movieData.title}</Typography>

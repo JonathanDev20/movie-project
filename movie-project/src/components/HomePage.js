@@ -6,6 +6,7 @@ import SearchField from './SearchField'
 import '../App.css'
 import { Link } from 'react-router-dom'
 import Movie from './Movie'
+import Footer from './Footer'
 
 const HomePage = () => {
   const [trendingData, isLoadingTrending, trendingError] = useFetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_API_KEY}`)
@@ -34,7 +35,7 @@ const HomePage = () => {
                     <Grid item md={6}>
                       <Link to={`/movie/${trendingData.results[0].id}`}>
                         <div className='trending'>
-                          <img src={`${imageUrl}/${trendingData.results[0].backdrop_path}`} alt="image1" style={{ height: 'auto', width: '100%', borderRadius: '10px' }} />
+                          <img src={`${imageUrl}/${trendingData.results[0].backdrop_path}`} alt={trendingData.results[0].title} style={{ height: 'auto', width: '100%', borderRadius: '10px' }} />
                           <div className='imageText'><p>{trendingData.results[0].title}</p></div>
                         </div>
                       </Link>
@@ -42,7 +43,7 @@ const HomePage = () => {
                     <Grid item md={6}>
                       <Link to={`/movie/${trendingData.results[1].id}`}>
                         <div className='trending'>
-                          <img src={`${imageUrl}/${trendingData.results[1].backdrop_path}`} alt="image2" style={{ height: 'auto', width: '100%', borderRadius: '10px' }} />
+                          <img src={`${imageUrl}/${trendingData.results[1].backdrop_path}`} alt={trendingData.results[1].title} style={{ height: 'auto', width: '100%', borderRadius: '10px' }} />
                           <div className='imageText'><p>{trendingData.results[1].title}</p></div>
                         </div>
                       </Link>
@@ -66,6 +67,7 @@ const HomePage = () => {
                       ))
                     )}
                   </Grid>
+                  <Footer />
                 </Grid>
               </Grid>
             </div>
