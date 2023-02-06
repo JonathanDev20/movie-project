@@ -32,7 +32,6 @@ const Discover = () => {
           return response.data.results
         }
       })
-      console.log(sortedMovies)
       setMovies(sortedMovies)
     }
     getMoviesByGenre()
