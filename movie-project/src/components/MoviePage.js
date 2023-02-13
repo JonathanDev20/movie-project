@@ -62,7 +62,7 @@ const MoviePage = () => {
                       </Grid>
                       <div style={{ marginTop: '20px' }}>
                         {movieData.genres.map((genre) => (
-                          <Button sx={{ marginRight: '4px' }} variant='outlined' color='warning'>{genre.name}</Button>
+                          <Button sx={{ marginRight: '4px', marginTop: '4px' }} variant='outlined' color='warning'>{genre.name}</Button>
                         ))}
                       </div>
                       <div style={{ marginTop: '20px', marginRight: '5px' }}>
