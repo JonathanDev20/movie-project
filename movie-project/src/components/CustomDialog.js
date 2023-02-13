@@ -8,11 +8,17 @@ const CustomDialog = ({ credit }) => {
   const [open, setOpen] = useState(false)
 
   const calculateAge = (birthDate) => {
-    const birth = new Date(birthDate)
-    const current = new Date()
-    const diff = current - birth
-    return Math.floor(diff/31557600000) // Divide by 1000*60*60*24*365.25
+    if (birthDate === null) {
+      return 'unknown'
+    } else {
+      const birth = new Date(birthDate)
+      const current = new Date()
+      const diff = current - birth
+      return Math.floor(diff/31557600000) // Divide by 1000*60*60*24*365.25
+    }
   }
+
+  console.log(personData)
 
   const handleClickOpen = () => {
     setOpen(true);

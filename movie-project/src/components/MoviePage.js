@@ -16,6 +16,7 @@ const MoviePage = () => {
   const [videoKey, setVideoKey] = useState('')
   const imageUrl = 'https://image.tmdb.org/t/p/original'
   const isSmallScreen = useMediaQuery('(max-width:1000px)')
+  const [showMore, setShowMore] = useState(false)
 
   const opts = {
     height: '100%',
@@ -26,6 +27,7 @@ const MoviePage = () => {
     },
   }
 
+  
   useEffect(() => {
     if (!isLoadingVideo && videoError === null) {
       const trailer = videoData.results.filter((movie) => movie.type === 'Trailer')
@@ -77,9 +79,17 @@ const MoviePage = () => {
                             <Typography my={4} variant='h4'>Cast</Typography>
                           </Grid>
                           <Grid item md={12}>
-                            {creditsData.cast.map((credit) => (
+                            {creditsData.cast
+                            .slice(0, showMore ? creditsData.cast.length : 15)
+                            .map((credit) => (
                               <CustomDialog credit={credit} />
                             ))}
+                            {creditsData.cast.length > 15 && !showMore && (
+                              <Button size='small' sx={{ marginLeft: '10px', color: '#fff' }} onClick={() => setShowMore(true)}>Show More</Button>
+                            )}
+                            {showMore && (
+                              <Button size='small' sx={{ marginLeft: '10px', color: '#fff' }} onClick={() => setShowMore(false)}>Show Less</Button>
+                            )}
                           </Grid>
                         </Grid>
                       </>
