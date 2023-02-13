@@ -19,7 +19,7 @@ const SearchField = () => {
 
   return (
     <Paper component="form"
-      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 390, mt: 2 }}>
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 390, mt: 2 }} onSubmit={(e) => e.preventDefault()}>
       <InputBase
         sx={{ ml: 1, flex: 1 }}
         placeholder="Search movie titles"

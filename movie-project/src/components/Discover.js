@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Grid, Typography, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material'
+import { Grid, Typography, Button } from '@mui/material'
 import MySidebar from './Sidebar'
 import SearchField from './SearchField'
 import useFetch from './useFetch'
@@ -7,9 +7,6 @@ import axios from 'axios'
 import '../App.css'
 import Movie from './Movie'
 import SortMovies from './SortMovies'
-import Footer from './Footer'
-import Genres from './Genres'
-
 
 const Discover = () => {
   const [genres, isLoadingGenres, genresError] = useFetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`)

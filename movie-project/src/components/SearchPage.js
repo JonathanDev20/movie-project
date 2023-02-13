@@ -6,7 +6,6 @@ import SearchField from './SearchField'
 import useFetch from './useFetch'
 import Movie from './Movie'
 import SortMovies from './SortMovies'
-import Footer from './Footer'
 
 const SearchPage = () => {
   const { searchWord } = useParams()

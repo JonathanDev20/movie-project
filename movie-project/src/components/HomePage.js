@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Grid, Box, Typography } from '@mui/material'
+import React from 'react'
+import { Grid, Typography } from '@mui/material'
 import useFetch from './useFetch'
 import MySidebar from './Sidebar'
 import SearchField from './SearchField'
